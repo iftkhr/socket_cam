@@ -9,7 +9,7 @@ size = struct.calcsize("Q")
 while True:
 
     while len(data) < size:
-        msg = s.recv(1024)
+        msg = s.recv(4*1024)
         if not msg: break
         data += msg
 
@@ -18,7 +18,7 @@ while True:
     msg_size = struct.unpack("Q", pckd_msg)[0]
 
     while len(data) < msg_size:
-        data += s.recv(1024)
+        data += s.recv(4*1024)
 
     frm_data = data[:msg_size]
     data = data[msg_size:]
